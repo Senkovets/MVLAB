@@ -12,7 +12,7 @@ namespace E2C
         public RectTransform rectTransform { get => (RectTransform)transform; }
 
         private float initialDistance;
-        private float zoomSpeed = 0.1f; // Скорость масштабирования
+        private float zoomSpeed = 0.01f; // Скорость масштабирования
 
         void Update()
         {
