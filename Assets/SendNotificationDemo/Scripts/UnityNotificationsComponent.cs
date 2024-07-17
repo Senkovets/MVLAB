@@ -29,5 +29,21 @@ public class UnityNotificationsComponent : MonoBehaviour
 
         AndroidNotificationCenter.SendNotification(notification, "news");
     }
-    
+
+    public void SendNotification(string lineName, string parameter, float value)
+    {
+        string title = $"Предупреждение: {parameter} на линии {lineName} превысил норму";
+        string text = $"На линии {lineName}, значение параметра {parameter} достигло {value}, что превышает норму.";
+
+        AndroidNotification notification = new AndroidNotification()
+        {
+            Title = title,
+            Text = text,
+            FireTime = System.DateTime.Now.AddSeconds(5),
+            SmallIcon = "icon_0",
+            LargeIcon = "icon_1"
+        };
+
+        AndroidNotificationCenter.SendNotification(notification, "news");
+    }
 }

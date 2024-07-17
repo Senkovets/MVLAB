@@ -27,7 +27,7 @@ public class ProductionLine : MonoBehaviour
         else
         {
             Debug.LogWarning($"No temperature data available for timestamp: {timestamp}");
-            return float.NaN; // или другое значение по умолчанию
+            return float.NaN; 
         }
     }
 
@@ -45,7 +45,7 @@ public class ProductionLine : MonoBehaviour
         else
         {
             Debug.LogWarning($"No vibration data available for timestamp: {timestamp}");
-            return float.NaN; // или другое значение по умолчанию
+            return float.NaN; 
         }
     }
 }
