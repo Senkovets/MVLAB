@@ -2026,8 +2026,9 @@ GameObject:
   - component: {fileID: 9134101696528156811}
   - component: {fileID: 1821830298559412181}
   - component: {fileID: 7084001169847500698}
+  - component: {fileID: 6114180515248875405}
   m_Layer: 5
-  m_Name: MachineTest (17)
+  m_Name: ProductionLineCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2138,6 +2139,25 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &6114180515248875405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6348132527288800741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885eed4abea675642a7f05f53a59a964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  Temperature: 0
+  Vibration: 0
+  WorkAllTime: 0
+  WorkMonthTime: 0
+  WorkWeekTime: 0
+  WorkDayTime: 0
 --- !u!1 &6454727209280332052
 GameObject:
   m_ObjectHideFlags: 0
