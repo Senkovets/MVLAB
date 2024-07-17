@@ -45,7 +45,7 @@ namespace Bitsplash.DatePicker.Tutorials
             if (DatePicker != null)
             {
                 // this method clears the selection ans selects a spcified range
-                DatePicker.Content.Selection.SelectRange(DateTime.Today, DateTime.Today + TimeSpan.FromDays(5));
+                DatePicker.Content.Selection.SelectRange(DateTime.Today, DateTime.Today + TimeSpan.FromDays(-30));
             }
         }
 
