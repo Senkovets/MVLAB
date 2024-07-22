@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class ProductionLine : MonoBehaviour
@@ -12,6 +14,68 @@ public class ProductionLine : MonoBehaviour
 
     private Dictionary<DateTime, float> _temperatureData = new Dictionary<DateTime, float>();
     private Dictionary<DateTime, float> _vibrationData = new Dictionary<DateTime, float>();
+
+    public TextMeshProUGUI NameTextMesh;
+    public TextMeshProUGUI WorkAllTimeTextMesh;
+    public TextMeshProUGUI WorkMonthTimeTextMesh;
+    public TextMeshProUGUI WorkWeekTimeTextMesh;
+    public TextMeshProUGUI WorkDayTimeTextMesh;
+    public TextMeshProUGUI TemperatureTextMesh;
+    public TextMeshProUGUI VibrationTextMesh;
+
+    private void Start()
+    {
+        TestFillVariables();
+    }
+
+    public void TestFillVariables()
+    {
+        Name = "Линия_" + UnityEngine.Random.Range(1, 100);
+        WorkAllTime = Mathf.Round(UnityEngine.Random.Range(500f, 2000f) * 10f) / 10f;
+        WorkMonthTime = Mathf.Round(UnityEngine.Random.Range(100f, 500f) * 10f) / 10f;
+        WorkWeekTime = Mathf.Round(UnityEngine.Random.Range(20f, 100f) * 10f) / 10f;
+        WorkDayTime = Mathf.Round(UnityEngine.Random.Range(1f, 20f) * 10f) / 10f;
+
+        _temperatureData = new Dictionary<DateTime, float>()
+    {
+        { DateTime.Now.AddDays(-1), Mathf.Round(UnityEngine.Random.Range(15f, 25f) * 10f) / 10f },
+        { DateTime.Now, Mathf.Round(UnityEngine.Random.Range(15f, 25f) * 10f) / 10f }
+    };
+
+        _vibrationData = new Dictionary<DateTime, float>()
+    {
+        { DateTime.Now.AddDays(-1), Mathf.Round(UnityEngine.Random.Range(3f, 7f) * 10f) / 10f },
+        { DateTime.Now, Mathf.Round(UnityEngine.Random.Range(3f, 7f) * 10f) / 10f }
+    };
+
+        // Обновить отображение
+        UpdateView();
+    }
+
+
+
+    public void UpdateView()
+    {
+        NameTextMesh.text = Name;
+        WorkAllTimeTextMesh.text = WorkAllTime.ToString();
+        WorkMonthTimeTextMesh.text = WorkMonthTime.ToString();
+        WorkWeekTimeTextMesh.text = WorkWeekTime.ToString();
+        WorkDayTimeTextMesh.text = WorkDayTime.ToString();
+
+        // Для отображения последних данных о температуре и вибрации
+        if (_temperatureData.Count > 0)
+        {
+            KeyValuePair<DateTime, float> lastTemperatureData = _temperatureData.Last();
+            TemperatureTextMesh.text = lastTemperatureData.Value.ToString();
+        }
+
+        if (_vibrationData.Count > 0)
+        {
+            KeyValuePair<DateTime, float> lastVibrationData = _vibrationData.Last();
+            VibrationTextMesh.text = lastVibrationData.Value.ToString();
+        }
+    }
+
 
     public void AddTemperature(DateTime timestamp, float temperature)
     {

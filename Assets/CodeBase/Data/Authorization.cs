@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class Authorization : MonoBehaviour
 {
@@ -8,10 +9,13 @@ public class Authorization : MonoBehaviour
     public TMP_InputField passwordInputField;
     public Button loginButton;
     public Toggle rememberMeToggle;
+    public Toggle showPasswordToggle;
+    public GameObject ObjectWindow;
 
     private void Start()
     {
         loginButton.onClick.AddListener(OnLoginButtonClicked);
+        showPasswordToggle.onValueChanged.AddListener(OnShowPasswordToggleChanged); 
 
         // Загрузить сохраненные данные пользователя, если они есть
         if (PlayerPrefs.HasKey("email") && PlayerPrefs.HasKey("password"))
@@ -20,6 +24,21 @@ public class Authorization : MonoBehaviour
             passwordInputField.text = PlayerPrefs.GetString("password");
             rememberMeToggle.isOn = PlayerPrefs.GetInt("rememberMe") == 1;
         }
+    }
+
+    private void OnShowPasswordToggleChanged(bool showPassword)
+    {
+        if (showPassword)
+        {
+            passwordInputField.contentType = TMP_InputField.ContentType.Standard; // Показать пароль
+        }
+        else
+        {
+            passwordInputField.contentType = TMP_InputField.ContentType.Password; // Скрыть пароль
+        }
+
+        // Обновить поле ввода, чтобы применить новый тип содержимого
+        passwordInputField.ForceLabelUpdate();
     }
 
     private void OnLoginButtonClicked()
@@ -51,6 +70,8 @@ public class Authorization : MonoBehaviour
                     PlayerPrefs.DeleteKey("password");
                     PlayerPrefs.SetInt("rememberMe", 0);
                 }
+
+                EndAuthorization();
             }
             else
             {
@@ -61,6 +82,12 @@ public class Authorization : MonoBehaviour
         {
             Debug.Log("Неверные данные");
         }
+    }
+
+    private void EndAuthorization()
+    {
+        ObjectWindow.gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     private bool IsValidEmail(string email)
