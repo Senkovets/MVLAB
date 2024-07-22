@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ProductionLine : MonoBehaviour
 {
@@ -22,10 +23,17 @@ public class ProductionLine : MonoBehaviour
     public TextMeshProUGUI WorkDayTimeTextMesh;
     public TextMeshProUGUI TemperatureTextMesh;
     public TextMeshProUGUI VibrationTextMesh;
+    public Button ChartButton;
 
     private void Start()
     {
         TestFillVariables();
+        ChartButton.onClick.AddListener(OnChartButtonClicked);
+    }
+
+    private void OnChartButtonClicked()
+    {
+        GameManager.Instance.OpenGraph();
     }
 
     public void TestFillVariables()

@@ -86,8 +86,7 @@ public class Authorization : MonoBehaviour
 
     private void EndAuthorization()
     {
-        ObjectWindow.gameObject.SetActive(true);
-        gameObject.SetActive(false);
+        GameManager.Instance.OpenObjectsWindow();
     }
 
     private bool IsValidEmail(string email)

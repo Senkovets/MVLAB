@@ -2164,6 +2164,7 @@ MonoBehaviour:
   WorkDayTimeTextMesh: {fileID: 5990066965567851893}
   TemperatureTextMesh: {fileID: 3848195947332738170}
   VibrationTextMesh: {fileID: 2631684846646322436}
+  ChartButton: {fileID: 3603969571149203965}
 --- !u!1 &6454727209280332052
 GameObject:
   m_ObjectHideFlags: 0
