@@ -1,5 +1,7 @@
 using Bitsplash.DatePicker.Tutorials;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     public SelectionTutorial SelectionTutorial;
 
+    public Button ViewChartButton;
+
     private void Awake()
     {
         // Проверка, существует ли уже экземпляр класса
@@ -26,6 +30,16 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject); // Уничтожаем дубликат
         }
+    }
+
+    private void Start()
+    {
+        ViewChartButton.onClick.AddListener(OnViewChartButtonClicked);
+    }
+
+    private void OnViewChartButtonClicked()
+    {
+        Debug.Log("ViewChartButton");
     }
 
     private void CloseAllWindows()
