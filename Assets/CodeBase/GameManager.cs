@@ -1,3 +1,4 @@
+using Bitsplash.DatePicker.Tutorials;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
     public GameObject objectsWindow;
     public GameObject graphWindow;
     public GameObject settingsWindow;
+
+    public SelectionTutorial SelectionTutorial;
 
     private void Awake()
     {

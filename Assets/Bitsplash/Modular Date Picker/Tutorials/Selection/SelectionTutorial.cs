@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +10,20 @@ namespace Bitsplash.DatePicker.Tutorials
     {
         public DatePickerSettings DatePicker;
         public Text InfoText;
-        // Start is called before the first frame update
+
+        public DateTime FirstDate;
+        public DateTime LastDate;
+
+        public TMP_InputField FirstDateInputField; 
+        public TMP_InputField LastDateInputField;  
+
+
+        public void UpdateInputField()
+        {
+            FirstDateInputField.text = FirstDate.ToShortDateString();
+            LastDateInputField.text = LastDate.ToShortDateString();
+        }
+
         void Start()
         {
             if(DatePicker != null)
@@ -58,8 +73,36 @@ namespace Bitsplash.DatePicker.Tutorials
                     text += "\r\n" + date.ToShortDateString();
                 }
                 InfoText.text = text;
+
+                ShowFirstAndLastSelectedDates();
+                UpdateInputField();
             }
         }
+
+        void ShowFirstAndLastSelectedDates()
+        {
+            if (InfoText != null && DatePicker != null)
+            {
+                var selection = DatePicker.Content.Selection;
+                if (selection.Count > 0)
+                {
+                    // Сортируем выбранные даты
+                    List<DateTime> sortedDates = new List<DateTime>(selection.GetItems());
+                    sortedDates.Sort();
+
+                    // Получаем первую и последнюю даты
+                    FirstDate = sortedDates[0];
+                    LastDate = sortedDates[sortedDates.Count - 1];
+
+                    // Форматируем даты для отображения
+                    string text = "Первая дата: " + FirstDate.ToShortDateString() +
+                                  "\r\nПоследняя дата: " + LastDate.ToShortDateString();
+
+                    InfoText.text = text;
+                }
+            }
+        }
+
         void OnSelectionChanged()
         {
             ShowAllSelectedDates();

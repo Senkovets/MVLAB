@@ -186,5 +186,11 @@ namespace Bitsplash.DatePicker
             }
             return false;
         }
+
+        public List<DateTime> GetItems()
+        {
+            return new List<DateTime>(mData);
+        }
+
     }
 }
