@@ -32,10 +32,10 @@ public class ChartDataInitilalizer : MonoBehaviour
         return data;
     }
 
-    private void BuildChart(Dictionary<DateTime, float> data, string seriesName, string productionLine)
+    private void BuildChart(Dictionary<DateTime, float> data, string parametrName, string productionLine)
     {
         E2ChartData.Series series = new E2ChartData.Series();
-        series.name = seriesName;
+        series.name = parametrName;
         E2ChartData.title = productionLine;
         series.dataY = new List<float>(data.Values);
         E2ChartData.series.Add(series);

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject settingsWindow;
 
     public SelectionTutorial SelectionTutorial;
+    public ChartDataInitilalizer ChartDataInitilalizer;
 
     public Button ViewChartButton;
 

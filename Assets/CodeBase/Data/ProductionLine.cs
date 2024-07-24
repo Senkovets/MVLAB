@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AdaptivePerformance;
 using UnityEngine.UI;
 
 public class ProductionLine : MonoBehaviour
 {
     public string Name;
+
     public float WorkAllTime;
     public float WorkMonthTime;
     public float WorkWeekTime;
     public float WorkDayTime;
 
+    private Dictionary<string, Dictionary<DateTime, float>> _parametrs;
     private Dictionary<DateTime, float> _temperatureData = new Dictionary<DateTime, float>();
     private Dictionary<DateTime, float> _vibrationData = new Dictionary<DateTime, float>();
 
@@ -29,7 +32,25 @@ public class ProductionLine : MonoBehaviour
     {
         TestFillVariables();
         ChartButton.onClick.AddListener(OnChartButtonClicked);
+
+        _parametrs[Constants.TemperatureKey] = _temperatureData;
+        _parametrs[Constants.VibrationKey] = _vibrationData;
+
     }
+
+    public Dictionary<DateTime, float> GetParameterData(string key)
+    {
+        if (_parametrs.TryGetValue(key, out var innerDictionary))
+        {
+            return innerDictionary;
+        }
+        else
+        {
+            // Если ключ не найден, можно вернуть пустой словарь или null
+            return null;
+        }
+    }
+
 
     private void OnChartButtonClicked()
     {
