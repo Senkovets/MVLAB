@@ -1,5 +1,4 @@
 using Bitsplash.DatePicker.Tutorials;
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -16,7 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject graphWindow;
     public GameObject settingsWindow;
 
-    public SelectionTutorial SelectionTutorial;
+    public SelectionTutorial DataPicker;
     public ChartDataInitilalizer ChartDataInitilalizer;
 
     public TMP_Dropdown ParametrDropdown;
@@ -45,9 +44,16 @@ public class GameManager : MonoBehaviour
 
     private void OnViewChartButtonClicked()
     {
-        Debug.Log("ViewChartButton");
+        Debug.Log("ViewChartButton_Build");
+        BuildChart();
     }
 
+    public void BuildChart()
+    {
+        ChartDataInitilalizer.BuildChart(CurrentProductionLine.GetParameterData(ParametrDropdown.options[ParametrDropdown.value].text),
+                                         ParametrDropdown.options[ParametrDropdown.value].text,
+                                         CurrentProductionLine.Name);
+    }
     private void CloseAllWindows()
     {
         // Закрыть все окна
@@ -83,6 +89,8 @@ public class GameManager : MonoBehaviour
         CloseAllWindows();
         graphWindow.SetActive(true);
         CurrentProductionLine = productionLine;
+
+        DataPicker.SelectDateRange();
         UpdateDropdownOptions();
     }
 

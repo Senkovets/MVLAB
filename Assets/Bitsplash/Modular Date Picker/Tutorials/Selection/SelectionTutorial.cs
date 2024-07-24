@@ -32,7 +32,6 @@ namespace Bitsplash.DatePicker.Tutorials
                 DatePicker.Content.OnSelectionChanged.AddListener(OnSelectionChanged);
                 DatePicker.Content.OnDisplayChanged.AddListener(OnDisplayChanged);
 
-                SelectSingleDate();
                 UpdateInputField();
 
                 ShowAllSelectedDates();// show all the selected days in the begining
