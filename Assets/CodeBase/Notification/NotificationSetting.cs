@@ -4,13 +4,26 @@ using UnityEngine.UI;
 
 public class NotificationSetting : MonoBehaviour
 {
+    public string Name;
     public Toggle toggleButton;
     public TextMeshProUGUI textMeshProUGUI;
     public TMP_InputField inputField;
 
+    public void UpdateView(string Name, bool isOn, float value)
+    {
+        textMeshProUGUI.text = Name;
+        inputField.text = value.ToString();
+        ChangeNotificationState(isOn);
+    }
+
     private void Start()
     {
         toggleButton.onValueChanged.AddListener(OnToggleValueChanged);
+    }
+
+    public void ChangeNotificationState(bool isOn)
+    {
+        toggleButton.isOn = isOn;
     }
 
     private void OnToggleValueChanged(bool isOn)
