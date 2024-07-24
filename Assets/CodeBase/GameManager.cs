@@ -50,10 +50,19 @@ public class GameManager : MonoBehaviour
 
     public void BuildChart()
     {
+        ClearChart();
         ChartDataInitilalizer.BuildChart(CurrentProductionLine.GetParameterData(ParametrDropdown.options[ParametrDropdown.value].text),
                                          ParametrDropdown.options[ParametrDropdown.value].text,
-                                         CurrentProductionLine.Name);
+                                         CurrentProductionLine.Name,
+                                         DataPicker.FirstDate,
+                                         DataPicker.LastDate);     
     }
+
+    public void ClearChart()
+    {
+        ChartDataInitilalizer.ClearChart();
+    }
+
     private void CloseAllWindows()
     {
         // Закрыть все окна
@@ -92,6 +101,8 @@ public class GameManager : MonoBehaviour
 
         DataPicker.SelectDateRange();
         UpdateDropdownOptions();
+
+        BuildChart();
     }
 
     public void OpenSettings()

@@ -1,7 +1,8 @@
 using E2C;
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using UnityEngine;
 
 public class ChartDataInitilalizer : MonoBehaviour
@@ -11,9 +12,9 @@ public class ChartDataInitilalizer : MonoBehaviour
 
     private void Start()
     {
-        Dictionary<DateTime, float> temperatureData = GenerateTemperatureData(100);
+        /*Dictionary<DateTime, float> temperatureData = GenerateTemperatureData(100);
 
-        BuildChart(temperatureData, "Temperature", "Линия 1");
+        BuildChart(temperatureData, "Temperature", "Линия 1");*/
     }
 
     private Dictionary<DateTime, float> GenerateTemperatureData(int count)
@@ -40,12 +41,34 @@ public class ChartDataInitilalizer : MonoBehaviour
         series.dataY = new List<float>(data.Values);
         E2ChartData.series.Add(series);
 
-        E2ChartData.categoriesX = new List<string>();
-        foreach (DateTime date in data.Keys)
-        {
-            E2ChartData.categoriesX.Add(date.ToString("dd/MM/yyyy HH:mm:ss"));
-        }
+        E2ChartData.categoriesX = new List<string>(data.Keys.Select(date => date.ToString("dd/MM/yyyy HH:mm:ss")));
+               
 
         E2Chart.UpdateChart();
+    }
+    public void BuildChart(Dictionary<DateTime, float> data, string parametrName, string productionLine, DateTime FirstDate, DateTime LastDate)
+    {
+        E2ChartData.Series series = new E2ChartData.Series();
+        series.name = parametrName;
+        E2ChartData.title = productionLine;
+
+        // Фильтруем ключи по заданному промежутку
+        var filteredData = data.Where(pair => pair.Key >= FirstDate && pair.Key <= LastDate)
+                              .ToDictionary(pair => pair.Key, pair => pair.Value);
+
+        series.dataY = new List<float>(filteredData.Values);
+        E2ChartData.series.Add(series);
+
+        E2ChartData.categoriesX = new List<string>(filteredData.Keys.Select(date => date.ToString("dd/MM/yyyy HH:mm:ss")));
+        // Здесь мы используем Select для преобразования каждой даты в строку
+        // и добавляем ее в список категорий
+
+        E2Chart.UpdateChart();
+    }
+
+
+    public void ClearChart()
+    {
+        E2ChartData.series.Clear();
     }
 }

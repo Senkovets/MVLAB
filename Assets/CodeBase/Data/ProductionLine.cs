@@ -32,8 +32,13 @@ public class ProductionLine : MonoBehaviour
         TestFillVariables();
         ChartButton.onClick.AddListener(OnChartButtonClicked);
 
+        _temperatureData = GenerateRandomData(100);
+        _vibrationData = GenerateRandomData(100);
+
         _parametrs[Constants.TemperatureKey] = _temperatureData;
         _parametrs[Constants.VibrationKey] = _vibrationData;
+
+        UpdateView();
 
     }
 
@@ -63,18 +68,7 @@ public class ProductionLine : MonoBehaviour
         WorkMonthTime = Mathf.Round(UnityEngine.Random.Range(100f, 500f) * 10f) / 10f;
         WorkWeekTime = Mathf.Round(UnityEngine.Random.Range(20f, 100f) * 10f) / 10f;
         WorkDayTime = Mathf.Round(UnityEngine.Random.Range(1f, 20f) * 10f) / 10f;
-
-        _temperatureData = new Dictionary<DateTime, float>()
-    {
-        { DateTime.Now.AddDays(-1), Mathf.Round(UnityEngine.Random.Range(15f, 25f) * 10f) / 10f },
-        { DateTime.Now, Mathf.Round(UnityEngine.Random.Range(15f, 25f) * 10f) / 10f }
-    };
-
-        _vibrationData = new Dictionary<DateTime, float>()
-    {
-        { DateTime.Now.AddDays(-1), Mathf.Round(UnityEngine.Random.Range(3f, 7f) * 10f) / 10f },
-        { DateTime.Now, Mathf.Round(UnityEngine.Random.Range(3f, 7f) * 10f) / 10f }
-    };
+          
 
         // Обновить отображение
         UpdateView();
@@ -93,6 +87,7 @@ public class ProductionLine : MonoBehaviour
         // Для отображения последних данных о температуре и вибрации
         if (_temperatureData.Count > 0)
         {
+            Debug.Log("xcvxcb");
             KeyValuePair<DateTime, float> lastTemperatureData = _temperatureData.Last();
             TemperatureTextMesh.text = lastTemperatureData.Value.ToString();
         }
@@ -140,4 +135,22 @@ public class ProductionLine : MonoBehaviour
             return float.NaN; 
         }
     }
+
+
+    private Dictionary<DateTime, float> GenerateRandomData(int count)
+    {
+        Dictionary<DateTime, float> data = new Dictionary<DateTime, float>();
+        DateTime startDate = new DateTime(2024, 7, 1, 14, 0, 0);
+        System.Random random = new System.Random();
+
+        for (int i = 0; i < count; i++)
+        {
+            DateTime date = startDate.AddHours(i);
+            float temperature = (float)(random.NextDouble() * 10 + 20); // Random temperature between 20.0 and 30.0
+            data[date] = temperature;
+        }
+
+        return data;
+    }
+
 }
