@@ -31,8 +31,14 @@ namespace Bitsplash.DatePicker.Tutorials
                 // handle selection change using a unity event
                 DatePicker.Content.OnSelectionChanged.AddListener(OnSelectionChanged);
                 DatePicker.Content.OnDisplayChanged.AddListener(OnDisplayChanged);
+
+                SelectSingleDate();
+                UpdateInputField();
+
                 ShowAllSelectedDates();// show all the selected days in the begining
-                DatePicker.Content.SetMarkerColor(DateTime.Now, Color.red);              
+                DatePicker.Content.SetMarkerColor(DateTime.Now, Color.red);   
+               
+                
             }
             
         }
@@ -107,10 +113,6 @@ namespace Bitsplash.DatePicker.Tutorials
         {
             ShowAllSelectedDates();
         }
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        
     }
 }

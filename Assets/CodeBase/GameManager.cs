@@ -1,5 +1,7 @@
 using Bitsplash.DatePicker.Tutorials;
 using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +19,10 @@ public class GameManager : MonoBehaviour
     public SelectionTutorial SelectionTutorial;
     public ChartDataInitilalizer ChartDataInitilalizer;
 
+    public TMP_Dropdown ParametrDropdown;
     public Button ViewChartButton;
+
+    public ProductionLine CurrentProductionLine;
 
     private void Awake()
     {
@@ -73,10 +78,38 @@ public class GameManager : MonoBehaviour
         graphWindow.SetActive(true);
     }
 
+    public void OpenGraph(ProductionLine productionLine)
+    {
+        CloseAllWindows();
+        graphWindow.SetActive(true);
+        CurrentProductionLine = productionLine;
+        UpdateDropdownOptions();
+    }
+
     public void OpenSettings()
     {
         CloseAllWindows();
         // Ваш код для открытия настроек
         settingsWindow.SetActive(true);
+    }
+
+    private void UpdateDropdownOptions()
+    {
+        // Очистите текущие опции
+        ParametrDropdown.ClearOptions();
+
+        // Получите ключи из _parametrs
+        List<string> keys = new List<string>(CurrentProductionLine._parametrs.Keys);
+
+        // Добавьте каждый ключ в опции
+        foreach (string key in keys)
+        {
+            TMP_Dropdown.OptionData optionData = new TMP_Dropdown.OptionData(key);
+            ParametrDropdown.options.Add(optionData);
+        }
+
+        // Выберите первую опцию (если нужно)
+        ParametrDropdown.value = 0;
+        ParametrDropdown.RefreshShownValue();
     }
 }

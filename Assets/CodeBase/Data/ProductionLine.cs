@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.AdaptivePerformance;
 using UnityEngine.UI;
 
 public class ProductionLine : MonoBehaviour
@@ -15,7 +14,7 @@ public class ProductionLine : MonoBehaviour
     public float WorkWeekTime;
     public float WorkDayTime;
 
-    private Dictionary<string, Dictionary<DateTime, float>> _parametrs;
+    public Dictionary<string, Dictionary<DateTime, float>> _parametrs = new Dictionary<string, Dictionary<DateTime, float>>();
     private Dictionary<DateTime, float> _temperatureData = new Dictionary<DateTime, float>();
     private Dictionary<DateTime, float> _vibrationData = new Dictionary<DateTime, float>();
 
@@ -54,7 +53,7 @@ public class ProductionLine : MonoBehaviour
 
     private void OnChartButtonClicked()
     {
-        GameManager.Instance.OpenGraph();
+        GameManager.Instance.OpenGraph(this);
     }
 
     public void TestFillVariables()
