@@ -20,14 +20,40 @@ public class ProductionLine : MonoBehaviour
 
 
 
-    public bool IsAnyNotificationsOn;
     [Serializable]
     public class NotificaationData
     {
         public bool BoolValue;
         public float FloatValue;
     }
-    private Dictionary<string, NotificaationData> Notificaations = new Dictionary<string, NotificaationData>();
+    public Dictionary<string, NotificaationData> Notificaations = new Dictionary<string, NotificaationData>();
+
+
+    public bool IsAnyNotificationsOn()
+    {
+        foreach (var kvp in Notificaations)
+        {
+            if (kvp.Value.BoolValue)
+            {
+                return true;
+            }
+        }
+        return false; // Если нет элементов с true BoolValue
+    }
+
+    public List<string> GetAllTrueNotificationKeys()
+    {
+        List<string> trueKeys = new List<string>();
+        foreach (var kvp in Notificaations)
+        {
+            if (kvp.Value.BoolValue)
+            {
+                trueKeys.Add(kvp.Key);
+            }
+        }
+        return trueKeys;
+    }
+
 
 
 
@@ -42,6 +68,16 @@ public class ProductionLine : MonoBehaviour
 
     private void Start()
     {
+        // Создаем новые элементы NotificaationData
+        NotificaationData newItem1 = new NotificaationData { BoolValue = true, FloatValue = 3.14f };
+        NotificaationData newItem2 = new NotificaationData { BoolValue = false, FloatValue = 2.71f };
+
+        // Добавляем элементы в словарь
+        Notificaations.Add(Constants.TemperatureKey, newItem1);
+        Notificaations.Add(Constants.VibrationKey, newItem2);
+
+
+
         TestFillVariables();
         ChartButton.onClick.AddListener(OnChartButtonClicked);
 

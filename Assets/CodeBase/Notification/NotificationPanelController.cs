@@ -4,19 +4,23 @@ public class NotificationPanelController : MonoBehaviour
 {
     public NotificationSetting NotificationSettingPrefab;
     private ProductionLine _currentProductionLine;
-    void Start()
+    private void OnEnable()
     {
-        Debug.Log("sas");
-        _currentProductionLine = GameManager.Instance.CurrentProductionLine;
-        foreach (var item in _currentProductionLine._parametrs)
+        foreach (Transform t in transform)
         {
-            Debug.Log(item);
+            Destroy(t.gameObject);
+            Debug.Log("destroy");
+        }
+        _currentProductionLine = GameManager.Instance.CurrentProductionLine;
+        foreach (var item in _currentProductionLine.Notificaations)
+        {
+            Debug.Log("spawn");
             NotificationSetting line = Instantiate(NotificationSettingPrefab, transform.position, Quaternion.identity);
             line.transform.SetParent(transform);
             line.transform.localScale = Vector3.one;
             line.transform.rotation = Quaternion.Euler(0f, 0f, -90f);
             line.transform.localPosition = Vector3.zero;
-            line.UpdateView(item.Key, false, 2f);
+            line.UpdateView(item.Key, item.Value.BoolValue, item.Value.FloatValue);
         }
     }
 
