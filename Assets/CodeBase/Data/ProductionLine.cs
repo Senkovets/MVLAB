@@ -18,6 +18,19 @@ public class ProductionLine : MonoBehaviour
     private Dictionary<DateTime, float> _temperatureData = new Dictionary<DateTime, float>();
     private Dictionary<DateTime, float> _vibrationData = new Dictionary<DateTime, float>();
 
+
+
+    public bool IsAnyNotificationsOn;
+    [Serializable]
+    public class NotificaationData
+    {
+        public bool BoolValue;
+        public float FloatValue;
+    }
+    private Dictionary<string, NotificaationData> Notificaations = new Dictionary<string, NotificaationData>();
+
+
+
     public TextMeshProUGUI NameTextMesh;
     public TextMeshProUGUI WorkAllTimeTextMesh;
     public TextMeshProUGUI WorkMonthTimeTextMesh;
@@ -32,8 +45,8 @@ public class ProductionLine : MonoBehaviour
         TestFillVariables();
         ChartButton.onClick.AddListener(OnChartButtonClicked);
 
-        _temperatureData = GenerateRandomData(10000);
-        _vibrationData = GenerateRandomData(10000);
+        _temperatureData = GenerateRandomData(100000);
+        _vibrationData = GenerateRandomData(100000);
 
         _parametrs[Constants.TemperatureKey] = _temperatureData;
         _parametrs[Constants.VibrationKey] = _vibrationData;
@@ -87,7 +100,6 @@ public class ProductionLine : MonoBehaviour
         // Для отображения последних данных о температуре и вибрации
         if (_temperatureData.Count > 0)
         {
-            Debug.Log("xcvxcb");
             KeyValuePair<DateTime, float> lastTemperatureData = _temperatureData.Last();
             TemperatureTextMesh.text = lastTemperatureData.Value.ToString();
         }
@@ -145,7 +157,7 @@ public class ProductionLine : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            DateTime date = startDate.AddHours(i);
+            DateTime date = startDate.AddMinutes(i);
             float temperature = (float)(random.NextDouble() * 10 + 20); // Random temperature between 20.0 and 30.0
             data[date] = temperature;
         }

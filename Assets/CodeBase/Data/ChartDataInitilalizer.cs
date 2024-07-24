@@ -15,6 +15,7 @@ public class ChartDataInitilalizer : MonoBehaviour
         /*Dictionary<DateTime, float> temperatureData = GenerateTemperatureData(100);
 
         BuildChart(temperatureData, "Temperature", "Линия 1");*/
+
     }
 
     private Dictionary<DateTime, float> GenerateTemperatureData(int count)
