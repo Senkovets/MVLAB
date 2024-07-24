@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     public void BuildChart()
     {
         ClearChart();
-        ChartDataInitilalizer.BuildChart(CurrentProductionLine.GetParameterData(ParametrDropdown.options[ParametrDropdown.value].text),
+        ChartDataInitilalizer.BuildChart(CurrentProductionLine.GetParameterData(GetDropDownOptios()),
                                          ParametrDropdown.options[ParametrDropdown.value].text,
                                          CurrentProductionLine.Name,
                                          DataPicker.FirstDate,
@@ -61,6 +61,12 @@ public class GameManager : MonoBehaviour
     public void ClearChart()
     {
         ChartDataInitilalizer.ClearChart();
+    }
+
+    public string GetDropDownOptios()
+    {
+        string optins = ParametrDropdown.options[ParametrDropdown.value].text;
+        return optins;
     }
 
     private void CloseAllWindows()
@@ -99,7 +105,7 @@ public class GameManager : MonoBehaviour
         graphWindow.SetActive(true);
         CurrentProductionLine = productionLine;
 
-        DataPicker.SelectDateRange();
+        DataPicker.SelectMonth();
         UpdateDropdownOptions();
 
         BuildChart();

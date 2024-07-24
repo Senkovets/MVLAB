@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -57,14 +58,65 @@ namespace Bitsplash.DatePicker.Tutorials
                 DatePicker.Content.Selection.SelectOne(DateTime.Today);
             }
         }
-        public void SelectDateRange()
+        public void SelectWeek()
         {
             if (DatePicker != null)
             {
-                // this method clears the selection ans selects a spcified range
-                DatePicker.Content.Selection.SelectRange(DateTime.Today, DateTime.Today + TimeSpan.FromDays(-30));
+                DateTime today = DateTime.Today;
+                DateTime weekAgo = today.AddDays(-7);
+                DatePicker.Content.Selection.SelectRange(weekAgo, today);
             }
         }
+        public void Select15Days()
+        {
+            if (DatePicker != null)
+            {
+                DateTime today = DateTime.Today;
+                DateTime daysAgo15 = today.AddDays(-15);
+                DatePicker.Content.Selection.SelectRange(daysAgo15, today);
+            }
+        }
+        public void SelectMonth()
+        {
+            if (DatePicker != null)
+            {
+                DateTime today = DateTime.Today;
+                DateTime monthAgo = today.AddMonths(-1);
+                DatePicker.Content.Selection.SelectRange(monthAgo, today);
+            }
+        }
+
+        public void Select3Months()
+        {
+            if (DatePicker != null)
+            {
+                DateTime today = DateTime.Today;
+                DateTime monthsAgo3 = today.AddMonths(-3);
+                DatePicker.Content.Selection.SelectRange(monthsAgo3, today);
+            }
+        }
+        public void SetAllTimeRangeForCurrentProductLine()
+        {
+            SetDateRange(GameManager.Instance.CurrentProductionLine.GetParameterData(GameManager.Instance.GetDropDownOptios()));
+            DatePicker.Content.Selection.SelectRange(FirstDate, LastDate);
+            UpdateInputField();
+        }
+
+        public void SetDateRange(Dictionary<DateTime, float> data)
+        {
+            if (data.Count > 0)
+            {
+                FirstDate = data.Keys.Min();
+                LastDate = data.Keys.Max();
+            }
+            else
+            {
+                // Обработка случая, когда словарь пуст
+                FirstDate = DateTime.MinValue;
+                LastDate = DateTime.MinValue;
+            }
+        }
+
 
         void ShowAllSelectedDates()
         {

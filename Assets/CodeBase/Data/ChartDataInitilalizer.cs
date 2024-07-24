@@ -70,5 +70,7 @@ public class ChartDataInitilalizer : MonoBehaviour
     public void ClearChart()
     {
         E2ChartData.series.Clear();
+        E2ChartData.categoriesX.Clear();
+        E2ChartData.categoriesY.Clear();
     }
 }
