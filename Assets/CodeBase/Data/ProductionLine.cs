@@ -82,8 +82,8 @@ public class ProductionLine : MonoBehaviour
         TestFillVariables();
         ChartButton.onClick.AddListener(OnChartButtonClicked);
 
-        _temperatureData = GenerateRandomData(100000);
-        _vibrationData = GenerateRandomData(100000);
+        _temperatureData = GenerateRandomData(1000);
+        _vibrationData = GenerateRandomData(1000);
 
         _parametrs[Constants.TemperatureKey] = _temperatureData;
         _parametrs[Constants.VibrationKey] = _vibrationData;

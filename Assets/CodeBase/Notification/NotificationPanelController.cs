@@ -18,7 +18,7 @@ public class NotificationPanelController : MonoBehaviour
             NotificationSetting line = Instantiate(NotificationSettingPrefab, transform.position, Quaternion.identity);
             line.transform.SetParent(transform);
             line.transform.localScale = Vector3.one;
-            line.transform.rotation = Quaternion.Euler(0f, 0f, -90f);
+            line.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             line.transform.localPosition = Vector3.zero;
             line.UpdateView(item.Key, item.Value.BoolValue, item.Value.FloatValue);
         }
