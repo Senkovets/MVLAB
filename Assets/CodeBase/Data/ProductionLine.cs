@@ -41,18 +41,19 @@ public class ProductionLine : MonoBehaviour
         return false; // Если нет элементов с true BoolValue
     }
 
-    public List<string> GetAllTrueNotificationKeys()
+    public Dictionary<string, float> GetAllTrueNotificationKeysAndValue()
     {
-        List<string> trueKeys = new List<string>();
+        Dictionary<string, float> trueKeys = new Dictionary<string, float>();
         foreach (var kvp in Notificaations)
         {
             if (kvp.Value.BoolValue)
             {
-                trueKeys.Add(kvp.Key);
+                trueKeys.Add(kvp.Key, kvp.Value.FloatValue);
             }
         }
         return trueKeys;
     }
+
 
 
 

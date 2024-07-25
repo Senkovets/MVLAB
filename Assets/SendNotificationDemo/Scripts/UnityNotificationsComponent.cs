@@ -7,9 +7,9 @@ public class UnityNotificationsComponent : MonoBehaviour
     {
         AndroidNotificationChannel channel = new AndroidNotificationChannel()
         {
-            Name = "News|Новости.",
-            Description = "Новости о проекте.",
-            Id = "news",
+            Name = "Notification|Предупреждения",
+            Description = "Предупреждения о превышении параметров на линиях",
+            Id = "Notification",
             Importance = Importance.High,
         };
         
@@ -44,6 +44,6 @@ public class UnityNotificationsComponent : MonoBehaviour
             LargeIcon = "icon_1"
         };
 
-        AndroidNotificationCenter.SendNotification(notification, "news");
+        AndroidNotificationCenter.SendNotification(notification, "Notification");
     }
 }
