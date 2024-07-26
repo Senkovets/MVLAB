@@ -51,11 +51,14 @@ public class GameManager : MonoBehaviour
     public void BuildChart()
     {
         ClearChart();
+        Debug.Log(DataPicker.FirstDate);
+        Debug.Log(DataPicker.LastDate);
         ChartDataInitilalizer.BuildChart(CurrentProductionLine.GetParameterData(GetDropDownOptios()),
                                          ParametrDropdown.options[ParametrDropdown.value].text,
                                          CurrentProductionLine.Name,
                                          DataPicker.FirstDate,
-                                         DataPicker.LastDate);     
+                                         DataPicker.LastDate);   
+
     }
 
     public void ClearChart()
@@ -107,7 +110,6 @@ public class GameManager : MonoBehaviour
 
         DataPicker.SelectMonth();
         UpdateDropdownOptions();
-
         BuildChart();
     }
 

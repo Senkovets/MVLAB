@@ -35,10 +35,9 @@ namespace Bitsplash.DatePicker.Tutorials
 
                 UpdateInputField();
 
-                ShowAllSelectedDates();// show all the selected days in the begining
-                DatePicker.Content.SetMarkerColor(DateTime.Now, Color.red);   
-               
-                
+                ShowAllSelectedDates();
+                DatePicker.Content.SetMarkerColor(DateTime.Now, Color.red);
+
             }
             
         }
@@ -62,37 +61,38 @@ namespace Bitsplash.DatePicker.Tutorials
         {
             if (DatePicker != null)
             {
-                DateTime today = DateTime.Today;
-                DateTime weekAgo = today.AddDays(-7);
-                DatePicker.Content.Selection.SelectRange(weekAgo, today);
+                FirstDate = DateTime.Today;
+                LastDate = FirstDate.AddDays(-7);
+                DatePicker.Content.Selection.SelectRange(FirstDate, LastDate);
             }
         }
         public void Select15Days()
         {
             if (DatePicker != null)
             {
-                DateTime today = DateTime.Today;
-                DateTime daysAgo15 = today.AddDays(-15);
-                DatePicker.Content.Selection.SelectRange(daysAgo15, today);
+                FirstDate = DateTime.Today;
+                LastDate = FirstDate.AddDays(-15);
+                DatePicker.Content.Selection.SelectRange(LastDate, FirstDate);
             }
         }
         public void SelectMonth()
         {
             if (DatePicker != null)
             {
-                DateTime today = DateTime.Today;
-                DateTime monthAgo = today.AddMonths(-1);
-                DatePicker.Content.Selection.SelectRange(monthAgo, today);
+                FirstDate = DateTime.Today;
+                LastDate = FirstDate.AddMonths(-1);
+                DatePicker.Content.Selection.SelectRange(LastDate, FirstDate);
             }
+            
         }
 
         public void Select3Months()
         {
             if (DatePicker != null)
             {
-                DateTime today = DateTime.Today;
-                DateTime monthsAgo3 = today.AddMonths(-3);
-                DatePicker.Content.Selection.SelectRange(monthsAgo3, today);
+                FirstDate = DateTime.Today;
+                LastDate = FirstDate.AddMonths(-3);
+                DatePicker.Content.Selection.SelectRange(LastDate, FirstDate);
             }
         }
         public void SetAllTimeRangeForCurrentProductLine()

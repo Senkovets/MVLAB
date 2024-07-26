@@ -196,10 +196,12 @@ public class ProductionLine : MonoBehaviour
         {
             DateTime date = startDate.AddMinutes(i);
             float temperature = (float)(random.NextDouble() * 10 + 20); // Random temperature between 20.0 and 30.0
+            temperature = (float)Math.Round(temperature, 1); // Округление до одного знака после запятой
             data[date] = temperature;
         }
 
         return data;
     }
+
 
 }

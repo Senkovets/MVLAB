@@ -53,20 +53,38 @@ public class ChartDataInitilalizer : MonoBehaviour
         series.name = parametrName;
         E2ChartData.title = productionLine;
 
+        // Проверяем, является ли FirstDate позже LastDate
+        if (FirstDate > LastDate)
+        {
+            // Если да, меняем их местами
+            DateTime temp = FirstDate;
+            FirstDate = LastDate;
+            LastDate = temp;
+        }
+
         // Фильтруем ключи по заданному промежутку
         var filteredData = data.Where(pair => pair.Key >= FirstDate && pair.Key <= LastDate)
                               .ToDictionary(pair => pair.Key, pair => pair.Value);
 
         series.dataY = new List<float>(filteredData.Values);
+
+        int length = series.dataY.Count;
+        Debug.Log(length);
         E2ChartData.series.Add(series);
+
 
         E2ChartData.categoriesX = new List<string>(filteredData.Keys.Select(date => date.ToString("dd/MM/yyyy HH:mm:ss")));
         // Здесь мы используем Select для преобразования каждой даты в строку
         // и добавляем ее в список категорий
 
         E2Chart.UpdateChart();
+
     }
 
+    public void UpdateChart()
+    {
+        E2Chart.UpdateChart();
+    }
 
     public void ClearChart()
     {
