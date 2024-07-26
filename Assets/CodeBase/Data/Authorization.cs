@@ -2,12 +2,13 @@
 using TMPro;
 using UnityEngine.UI;
 using System;
+using Michsky.MUIP;
 
 public class Authorization : MonoBehaviour
 {
     public TMP_InputField emailInputField;
     public TMP_InputField passwordInputField;
-    public Button loginButton;
+    public ButtonManager loginButton;
     public Toggle rememberMeToggle;
     public Toggle showPasswordToggle;
     public GameObject ObjectWindow;

@@ -1,3 +1,4 @@
+using Michsky.MUIP;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,7 +66,7 @@ public class ProductionLine : MonoBehaviour
     public TextMeshProUGUI WorkDayTimeTextMesh;
     public TextMeshProUGUI TemperatureTextMesh;
     public TextMeshProUGUI VibrationTextMesh;
-    public Button ChartButton;
+    public ButtonManager ChartButton;
 
     private void Start()
     {
