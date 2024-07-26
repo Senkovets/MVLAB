@@ -17,7 +17,7 @@ namespace E2C
         void Update()
         {
             if (onZoom == null) return;
-            HandleMouseScroll();
+            //HandleMouseScroll();
             HandleTouchScroll();
         }
 

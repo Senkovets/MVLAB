@@ -27,7 +27,7 @@ public class UnityNotificationsComponent : MonoBehaviour
             LargeIcon = "icon_1"
         };
 
-        AndroidNotificationCenter.SendNotification(notification, "news");
+        AndroidNotificationCenter.SendNotification(notification, "Notification");
     }
 
     public void SendNotification(string lineName, string parameter, float value)
